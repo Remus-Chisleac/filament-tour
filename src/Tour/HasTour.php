@@ -35,6 +35,13 @@ trait HasTour
                                 ->with('iconColor', $step->getIconColor())
                                 ->render(),
                             'description' => $step->getDescription(),
+
+                            'nextBtnText' => $step->getNextButtonLabel(),
+                            'prevBtnText' => $step->getPreviousButtonLabel(),
+                            'doneBtnText' => $step->getDoneButtonLabel(),
+
+                            'side' => $step->getSide(),
+                            'align' => $step->getAlignment()
                         ],
 
                         'progress' => [

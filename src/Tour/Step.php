@@ -6,6 +6,7 @@ use Closure;
 use Exception;
 use Filament\Notifications\Notification;
 use Filament\Support\Concerns\EvaluatesClosures;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\HtmlString;
 use Illuminate\View\View;
 use JibayMcs\FilamentTour\Tour\Step\StepEvent;
@@ -28,6 +29,16 @@ class Step
 
     private bool $uncloseable = false;
 
+    private ?string $nextButtonLabel = null;
+
+    private ?string $previousButtonLabel = null;
+
+    private ?string $doneButtonLabel = null;
+
+    private ?string $side = "left";
+
+    private ?string $align = "start";
+
     public function __construct(?string $element = null)
     {
         $this->element = $element;
@@ -44,6 +55,14 @@ class Step
         $app->icon($step['icon'] ?? null);
         $app->iconColor($step['iconColor'] ?? null);
         $app->uncloseable($step['uncloseable'] ?? false);
+
+        $app->nextButtonLabel($step['nextBtnText'] ?? null);
+        $app->previousButtonLabel($step['prevButText'] ?? null);
+        $app->doneButtonLabel($step['doneBtnText'] ?? null);
+
+        $app->side($step['side'] ?? "left");
+        $app->alignment($step['align']??"start");
+
 
         if ($step['events']['dispatchOnNext']) {
             $app->dispatchOnNext($step['events']['dispatchOnNext'][0], ...$step['events']['dispatchOnNext'][1]);
@@ -94,6 +113,7 @@ class Step
      * Set the description of your step.
      *
      * @return $this
+     * @throws Exception
      */
     public function description(string|Closure|HtmlString|View $description): self
     {
@@ -155,6 +175,68 @@ class Step
     }
 
     /**
+     * Set the label of the next button.
+     *
+     * @return $this
+     */
+    public function nextButtonLabel(string $label): self
+    {
+        $this->nextButtonLabel = $label;
+
+        return $this;
+    }
+
+    /**
+     * Set the label of the previous button.
+     *
+     * @return $this
+     */
+    public function previousButtonLabel(string $label): self
+    {
+        $this->previousButtonLabel = $label;
+
+        return $this;
+    }
+
+    /**
+     * Set the label of the done button.
+     *
+     * @return $this
+     */
+    public function doneButtonLabel(string $label): self
+    {
+        $this->doneButtonLabel = $label;
+
+        return $this;
+    }
+
+    /**
+     *  Set the position of the popover relative to the target element.
+     * <br>
+     *  $side: "top" | "right" | "bottom" | "left"
+     *  @return $this
+     */
+    public function side(string $side): self
+    {
+        $this->side = $side;
+
+        return $this;
+    }
+
+    /**
+     *  Set the alignment of the popover relative to the target element.
+     * <br>
+     *  $align: "start" | "center" | "end"
+     *  @return $this
+     */
+    public function alignment(string $align): self
+    {
+        $this->align = $align;
+
+        return $this;
+    }
+
+    /**
      * Create the instance of your step.
      * <br>
      * If no **$element** defined, the step will be shown as a modal.
@@ -192,5 +274,30 @@ class Step
     public function isUncloseable(): bool
     {
         return $this->uncloseable;
+    }
+
+    public function getNextButtonLabel(): ?string
+    {
+        return $this->nextButtonLabel;
+    }
+
+    public function getPreviousButtonLabel(): ?string
+    {
+        return $this->previousButtonLabel;
+    }
+
+    public function getDoneButtonLabel(): ?string
+    {
+        return $this->doneButtonLabel;
+    }
+
+    public function getSide(): string
+    {
+        return $this->side;
+    }
+
+    public function getAlignment(): string
+    {
+        return $this->align;
     }
 }
