@@ -36,9 +36,9 @@ trait HasTour
                                 ->render(),
                             'description' => $step->getDescription(),
 
-                            'nextBtnText' => $step->getNextButtonLabel(),
-                            'prevBtnText' => $step->getPreviousButtonLabel(),
-                            'doneBtnText' => $step->getDoneButtonLabel(),
+                            'nextBtnText' => $step->getNextButtonLabel() ?? $tour->getNextButtonLabel(),
+                            'prevBtnText' => $step->getPreviousButtonLabel() ?? $tour->getPreviousButtonLabel(),
+                            'doneBtnText' => $step->getDoneButtonLabel() ?? $tour->getDoneButtonLabel(),
 
                             'side' => $step->getSide(),
                             'align' => $step->getAlignment()
@@ -56,6 +56,8 @@ trait HasTour
                             'clickOnNext' => $step->getClickOnNext(),
                             'notifyOnNext' => $step->getNotifyOnNext(),
                             'dispatchOnNext' => $step->getDispatchOnNext(),
+
+                            'dispatchOnClose' => $tour->getDispatchOnClose(),
                         ];
                     }
 
@@ -80,6 +82,7 @@ trait HasTour
                         'id' => "{$prefixId}{$tour->getId()}",
 
                         'alwaysShow' => $tour->isAlwaysShow(),
+                        'visible' => $tour->isVisible(),
 
                         'colors' => [
                             'light' => $tour->getColors()['light'],

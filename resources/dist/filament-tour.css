@@ -4487,7 +4487,7 @@ select{
 }
 
 /** wired things happens when you have the arrow on any other side then right
-    /*.dark .driver-popover-arrow {*/
+        /*.dark .driver-popover-arrow {*/
 
 /*    border: 5px solid rgb(var(--gray-900)) !important;*/
 
@@ -4499,19 +4499,19 @@ select{
 
 /*}*/
 
-.dark .driver-popover-arrow-side-left{
+.dark .driver-popover-arrow-side-left {
   border-left-color: rgb(var(--gray-900)) !important;
 }
 
-.dark .driver-popover-arrow-side-right{
+.dark .driver-popover-arrow-side-right {
   border-right-color: rgb(var(--gray-900)) !important;
 }
 
-.dark .driver-popover-arrow-side-top{
+.dark .driver-popover-arrow-side-top {
   border-top-color: rgb(var(--gray-900)) !important;
 }
 
-.dark .driver-popover-arrow-side-bottom{
+.dark .driver-popover-arrow-side-bottom {
   border-bottom-color: rgb(var(--gray-900)) !important;
 }
 
@@ -4525,6 +4525,14 @@ select{
   position: fixed;
   top: 0;
   right: 0;
+}
+
+.dark .driver-popover-close-btn {
+  color: rgb(var(--primary-500));
+}
+
+.dark .driver-popover-close-btn:hover{
+  color: rgb(var(--primary-900));
 }
 
 .\[transform\:translateZ\(0\)\]{
