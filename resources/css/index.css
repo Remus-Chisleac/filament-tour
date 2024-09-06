@@ -7,7 +7,7 @@
 @tailwind screens;
 
 .hidden {
-    display: none !important;
+    display: none ;
 }
 
 #circle-cursor {
